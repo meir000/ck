@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="UTF-8" />
+<style>
+
+body{
+  background-color:#eee;
+  color:#222;
+  font-family:'meiryo', sans-serif;
+  font-size: 10pt;
+}
+h3{
+  font-size:14pt;
+}
+
+table{
+  border-collapse:collapse;
+}
+td{
+  vertical-align:top;
+  border:1px dotted #888;
+  padding: 0.3em 0.5em;
+}
+td table{
+  margin:0.5em 2em;
+}
+.ti{
+  white-space:nowrap;
+}
+
+img {
+  border:1px solid #888;
+}
+li{
+  padding:0.3em;
+}
+ul, ol{
+  margin: 0.5em 0em 0.5em 2em;
+  padding:0;
+}
+
+.t {
+  background-color:#444;
+  color:#eee;
+  padding:0.5em;
+  font-weight:bold;
+  font-size:12pt;
+}
+.e{
+  margin: 1em 0em 2em 2em;
+}
+.cmd{
+  border:1px dotted #888;
+  padding:0.5em;
+  white-space:nowrap;
+}
+
+</style>
+<title>ck terminal emulator</title>
+</head><body>
+
+<h3>ck terminal emulator</h3>
+
+
+<div class=e>
+	<ul>
+	<li><a href="#desc">概要</a></li>
+	<li><a href="#inst">インストール</a></li>
+	<li><a href="#beg">使い方</a></li>
+	<li><a href="#menu">右クリックメニュー</a></li>
+	<li><a href="#cmdline">コマンドライン引数</a></li>
+	<li><a href="#config">設定ファイル</a></li>
+	</ul>
+</div>
+
+
+<a name="desc"><div class="t">概要</div></a>
+<div class="e">
+	<a href="html/screenshot.png"><img src="html/screenshot-s.png"></a><br>
+	<ul>
+	<li>cygwin専用の端末ソフトです。</li>
+	<li>複数シェルを起動、切り替えて操作できます。</li>
+	<li>日本語に特化した文字コード自動判別により、Shift_JIS / EUC-JP / UTF-8 を 切替え操作なく表示できます。</li>
+	<li>背景画像に透過PNGを指定すると半透明ウィンドウにできます。</li>
+	</ul>
+</div>
+
+
+<a name="inst"><div class="t">インストール</div></a>
+<div class="e">
+	<ol>
+	<li><span style="color:green;">ck.exe, ck.con.exe, ck.app.dll</span> の３ファイルを /bin にコピーする。<span style="color:#666;">（ C:\cygwin\bin\ ）</span>
+	</li>
+	<li><span style="color:green;">.ck.config.js </span>ファイルを HOMEディレクトリにコピーする。<span style="color:#666;">（ C:\cygwin\home\&lt;username&gt;\ ）</span>
+	</li>
+	<li><span style="color:green;">/bin/ck.exe</span> へのショートカットをデスクトップに作る。プロパティを開き ”作業フォルダ”にHOMEディレクトリを設定。
+		<table>
+		<tr><td>リンク先<td>C:\cygwin\bin\ck.exe
+		<tr><td>作業フォルダ<td>C:\cygwin\home\&lt;username&gt;\
+		</table>
+	</li>
+	<li>このショートカットをダブルクリックして起動します。
+	</li>
+	</ol>
+</div>
+
+
+<a name="beg"><div class="t">使い方</div></a>
+<div class="e">
+
+	<ul>
+	<li>全ての操作は、右クリックメニューか、キーボードショートカットで行います。設定ダイアログ等はありません。
+	<li>Ctrl + Tabキーで開いてるシェルを切り替え。
+	<li>Ctrl + マウスホイールで文字サイズを変更。
+	<li>エクスプローラー等から ファイルやフォルダを、<br>
+		マウス左ボタンでドラッグして入れると、Windowsパス (C:\cygwin\...) でペースト入力できます。<br>
+		マウス右ボタンでドラッグして入れると、cygwinパス (/cygdrive/c/cygwin/...) で入力できます。
+	</ul>
+</div>
+
+
+<a name="menu"><div class="t">右クリックメニュー</div></a>
+<div class="e">
+	<table>
+	<tr><td class=ti>New Shell<td>新しいシェルを起動します。
+	<tr><td class=ti>New Shell in New Window<td>新しいウィンドウで、新しいシェルを起動します。
+	<tr><td class=ti>Open Window<td>新しいウィンドウを１枚開きます。
+	<tr><td class=ti>Close Window<td>現在のウィンドウを閉じる
+	<tr><td class=ti>Paste<td>クリップボードの文章をペーストして入力。
+	<tr><td class=ti>Input ShiftJIS, EUC-JP, UTF8<td>IMEで日本語入力する際の文字コードを指定。変更する
+	<tr><td class=ti>Display ShiftJIS, EUC-JP, UTF8<td>表示する文字コードを指定する。
+		文字コード自動判別がうまく効かない場合（リモート回線速度が遅い場合など）には、表示する文字コードを限定すると良い。
+	<tr><td class=ti>Tty: Scroll Keypress<td>キー入力したときに、カーソル行へスクロールします。
+	<tr><td class=ti>Tty: Scroll Output<td>表示内容が変更されたときに、カーソル行へスクロールします。
+	<tr><td class=ti>Tty: BS as DEL<td>Backspaceキーを Deleteキーにする
+	<tr><td class=ti>Tty: CJK Width<td>半角全角の基準を変更。
+	<tr><td class=ti>Tty: Reset<td>スクリーンバッファをリセットします。文字色など初期状態へ
+	<tr><td class=ti>Win: Scrollbar<td>スクロールバーの表示/非表示
+	<tr><td class=ti>Win: ZOrder Normal<td>通常ウィンドウ
+	<tr><td class=ti>Win: ZOrder Top<td>ウィンドウを最前面に固定
+	<tr><td class=ti>Win: ZOrder Bottom<td>ウィンドウを最背面に固定
+	<tr><td class=ti>Win: FontSize+<td>文字サイズを大きく
+	<tr><td class=ti>Win: FontSize-<td>文字サイズを小さく
+	</table>
+</div>
+
+<a name="cmdline"><div class="t">コマンドライン引数</div></a>
+<div class="e">
+	<table>
+	<tr><td class=ti>-share<td>
+		<ul>
+		<li>-share を指定しない デフォルト動作は、<br>
+			<ul>
+			<li>ckの中から <span style="color:green;">ck.exe -e tcsh</span> などと起動した際は<br>
+				親ckにコマンドが渡され、新しいウィンドウで実行します（New Shell in New Window や -share 指定の時と同じ挙動)<br>
+			</li>
+			<li>explorerなど外部から <span style="color:green;">ck.exe</span>を実行したときは、<br>
+				新しいckプロセスで実行されます。
+				プロセスが別なので 複数のcygwinバージョンを同時実行、使い分け出来ます。<br>
+			</li>
+			</ul>
+		</li>
+		<li>-share を指定すると、<br>
+			外部からckを実行した際も、既存のckで実行します。
+			複数の<span style="color:green;">ck.con.exe</span>プロセスが起動してると どのckで実行されるか不定。
+		</li>
+		</ul>
+		引数の１番最初に指定したときだけ有効。
+
+	<tr><td class=ti>-dir<td>コマンド実行時の作業ディレクトリを指定
+	<tr><td class=ti>-fg<td>文字色
+	<tr><td class=ti>-bg<td>背景色
+	<tr><td class=ti>-cr<td>カーソル色
+	<tr><td class=ti>-bgbmp<td>背景画像
+	<tr><td class=ti>-fn<td>フォント名
+	<tr><td class=ti>-fs<td>フォントサイズ
+	<tr><td class=ti>-lsp<td>line space 行間
+	<tr><td class=ti>-sl<td>savelines 履歴行数
+	<tr><td class=ti>-/+sb<td>スクロールバー表示・非表示
+	<tr><td class=ti>-/+si<td>scroll output
+	<tr><td class=ti>-/+sk<td>scroll key
+	<tr><td class=ti>-/+bs<td>bs as del
+	<tr><td class=ti>-/+cjk<td>cjk width
+	<tr><td class=ti>-km<td>input_encoding (sjis,eucjp,utf8 のどれか)
+	<tr><td class=ti>-md<td>display_encoding (sjis,eucjp,utf8 カンマ区切りで複数指定可)
+	<tr><td class=ti>-title<td>タイトル
+	<tr><td class=ti>-g<td>80x24+0+0 のような、ウィンドウの大きさと位置を指定。
+	<tr><td class=ti>-f<td>読み込むスクリプトファイル(.ck.config.js)を指定。
+	<tr><td class=ti>-e<td>実行するコマンドを指定。
+	</table>
+	<br>
+</div>
+
+<a name="config"><div class="t">設定ファイル</div></a>
+<div class="e">
+	$HOME/.ck.config.js を書き換えてから ckを起動すると反映されます。<br>
+	中身は javascript です。文法などを間違うと起動しないかも。<br>
+	<br>
+	<table>
+	<tr><td class=ti>Config.tty.execute_command<td>実行するシェルコマンド。&quot;/bin/bash --login -i&quot;
+	<tr><td class=ti>Config.tty.title<td>タイトルバーに表示する初期タイトル
+	<tr><td class=ti>Config.tty.savelines<td>保持する履歴行数
+	<tr><td class=ti>Config.tty.input_encoding<td>入力に用いる文字コード。Encoding.SJIS / Encoding.EUCJP / Encoding.UTF8のどれか
+	<tr><td class=ti>Config.tty.display_encoding<td>表示に用いる文字コード。Encoding.SJIS / Encoding.EUCJP / Encoding.UTF8のどれか, または | (or) で複数指定
+	<tr><td class=ti>Config.tty.scroll_key<td>キー入力された時、最下行にスクロールする on/off
+	<tr><td class=ti>Config.tty.scroll_output<td>表示出力があった時、最下行にスクロールする on/off
+	<tr><td class=ti>Config.tty.bs_as_del<td>Backspaceキー(0x08)を delete(0x7F)にする on/off
+	<tr><td class=ti>Config.tty.use_bell<td>警告音を鳴らす on/off
+	<tr><td class=ti>Config.tty.cjk_width<td>半角全角の判定基準を切り替え on/off
+	<tr><td colspan=2>
+	<tr><td class=ti>Config.window.position_x<br>Config.window.position_y
+		<td>ウィンドウの位置。＋プラス値で左(上)から右(下)へ。－マイナス値で右(下)から左(上)へのpixel数。nullで未設定になる。
+	<tr><td class=ti>Config.window.cols<td>ウィンドウの横の文字数
+	<tr><td class=ti>Config.window.rows<td>ウィンドウの行数
+	<tr><td class=ti>Config.window.scrollbar_show<td>スクロールバーを表示する on/off
+	<tr><td class=ti>Config.window.scrollbar_right<td>スクロールバーを右側に表示 on/off
+	<tr><td class=ti>Config.window.blink_cursor<td>カーソルを点滅させる on/off
+	<tr><td class=ti>Config.window.zorder<td>ウィンドウのZ位置。
+		<table>
+		<tr><td>WinZOrder.Normal<td>通常
+		<tr><td>WinZOrder.Top<td>前面に固定
+		<tr><td>WinZOrder.Bottom<td>背面に固定
+		</table>
+	<tr><td class=ti>Config.window.linespace<td>行間に空けるpixel数
+	<tr><td class=ti>Config.window.border_left<br>Config.window.border_top<br>Config.window.border_right<br>Config.window.border_bottom
+		<td>ウィンドウ周囲に空けるpixel数
+	<tr><td class=ti>Config.window.mouse_left<br>Config.window.mouse_middle<br>Config.window.mouse_right
+		<td>マウスクリックした時の挙動。
+		左クリック、右クリックと 中クリック（ホイールクリック）<br>
+		<table>
+		<tr><td>MouseCmd.None<td>何もしない
+		<tr><td>MouseCmd.Select<td>文字選択する
+		<tr><td>MouseCmd.Paste<td>クリップボードからペースト
+		<tr><td>MouseCmd.Menu<td>メニューを表示
+		</table>
+	<tr><td class=ti>Config.window.font_name<td>フォント名
+	<tr><td class=ti>Config.window.font_size<td>フォントサイズ
+	<tr><td class=ti>Config.window.background_file<td>背景に貼るbmp/jpg/png等の画像ファイル。cygwinフルパスで指定（HomeDir+&quot;/hoge.bmp&quot; とか）
+	<tr><td class=ti>Config.window.background_repeat_x<br>Config.window.background_repeat_y
+		<td>背景画像の表示方法。<br>
+		<table>
+		<tr><td>Place.Scale<td>縦横比を維持せずに、ウィンドウに合わせ拡大縮小
+		<tr><td>Place.Contain<td>縦横比を維持しつつ、画像全体がウィンドウ内に収まるよう拡大縮小
+		<tr><td>Place.Cover<td>縦横比を維持しつつ、画像がウィンドウ全体を覆うように拡大縮小
+		<tr><td>Place.Repeat<td>並べて表示
+		<tr><td>Place.NoRepeat<td>１つだけ表示
+		</table>
+		余白部分は画像の周囲１ピクセルが引き伸ばされます。
+	<tr><td class=ti>Config.window.background_align_x<br>Config.window.background_align_y
+		<td>背景画像の基準位置。<br>
+		<table>
+		<tr><td>Align.Near<td>左/上
+		<tr><td>Align.Center<td>中央
+		<tr><td>Align.Far<td>右/下
+		</table>
+	<tr><td class=ti>Config.window.color_foreground<td>文字色。16進数で 0xRRGGBB のように 24bitで指定。
+	<tr><td class=ti>Config.window.color_background<td>背景色。16進数で 0xAARRGGBB のように 32bitで指定。<br/>
+			背景画像を指定しているとき、文字の縁取りの色になります。<br/>
+			背景画像を指定していないとき、背景色と透明度になります。<br/>
+	<tr><td class=ti>Config.window.color_selection <td>選択色。透明度あり 16進数で 0xAARRGGBB のように 32bitで指定。<br/>
+			透明度は背景色・画像との重ね合わせに使うだけで、他ウィンドウとの重ね合わせは不透明になります。
+	<tr><td class=ti>Config.window.color_cursor    <td>カーソル色。16進数で 0xRRGGBB のように 24bitで指定。
+	<tr><td class=ti>Config.window.color_imecursor <td>IME入力時のカーソル色。16進数で 0xRRGGBB のように 24bitで指定。
+	<tr><td class=ti>Config.window.color_scrollbar <td>スクロールバーの色。16進数で 0xRRGGBB のように 24bitで指定。
+	<tr><td class=ti>Config.window.color_color0<br>...<br>Config.window.color_color15
+		<td>color0 ～ color15<br>16進数で 0xRRGGBB のように 24bitで指定。
+	<tr><td colspan=2>
+	<tr><td class=ti>Config.accelkey.new_shell   <td>ショートカットキー。新しいシェルを開く
+	<tr><td class=ti>Config.accelkey.new_window  <td>ショートカットキー。新しいウィンドウで新しいシェルを開く
+	<tr><td class=ti>Config.accelkey.open_window <td>ショートカットキー。新しいウィンドウを開く
+	<tr><td class=ti>Config.accelkey.close_window<td>ショートカットキー。ウィンドウを閉じる
+	<tr><td class=ti>Config.accelkey.next_shell  <td>ショートカットキー。次のシェルに表示切り替え
+	<tr><td class=ti>Config.accelkey.prev_shell  <td>ショートカットキー。前のシェルに表示切り替え
+	<tr><td class=ti>Config.accelkey.paste       <td>ショートカットキー。クリップボードからペースト
+	<tr><td class=ti>Config.accelkey.popup_menu  <td>ショートカットキー。メニューを開く
+	<tr><td class=ti>Config.accelkey.popup_sys_menu<td>ショートカットキー。ウィンドウ操作等のシステムメニューを開く
+	<tr><td class=ti>Config.accelkey.scroll_page_up  <td>ショートカットキー。１ページ上スクロール
+	<tr><td class=ti>Config.accelkey.scroll_page_down<td>ショートカットキー。１ページ下スクロール
+	<tr><td class=ti>Config.accelkey.scroll_line_up  <td>ショートカットキー。１行上スクロール
+	<tr><td class=ti>Config.accelkey.scroll_line_down<td>ショートカットキー。１行下スクロール
+	<tr><td class=ti>Config.accelkey.scroll_top   <td>ショートカットキー。最上行へスクロール
+	<tr><td class=ti>Config.accelkey.scroll_bottom<td>ショートカットキー。最下行へスクロール
+	</table>
+	<br>
+	<ul>
+	<li>on/offの所は 1 か 0 で指定する。
+	</li>
+	<li>ショートカットキーで使える<a href="html/keys.html">キーコード一覧はこちら</a>。
+	</li>
+	<li>script内で $HOMEディレクトリのパスとして <span style="color:firebrick;">HomeDir</span> が使えます。<br>
+		Config.window.background_file = HomeDir + &quot;/images/foobar.png&quot;;
+	</li>
+	</ul>
+</div>
+
+<!--
+<a name="chere"><div class="t">エクスプローラーの右クリックメニューに追加</div></a>
+<div class="e">
+	エクスプローラーから、そのフォルダでckを開きたい場合の設定。（chereと同じ機能）<br>
+	<div><img src="html/chere1.jpg"></div>
+	<br>
+	レジストリ HKEY_CURRENT_USER\Software\Classes\Directory\shell\ 以下に追加すればメニューに追加されます。<br>
+	<div><img src="html/chere2.jpg"></div>
+	起動オプションは好みで適当に
+	<div class=cmd>
+	C:\cygwin\bin\ck.exe -share -dir &quot;%L&quot;
+	</div>
+
+	<br>
+	<ul>
+	<li>
+		レジストリ登録をコマンドラインで行うなら
+		<div class=cmd>
+			reg.exe add &quot;HKCU\Software\Classes\Directory\shell\cygwin_ck&quot; /ve /t REG_SZ /d &quot;cygwin_ckで開く (&amp;B)&quot; /f<br>
+			reg.exe add &quot;HKCU\Software\Classes\Directory\shell\cygwin_ck\command&quot; /ve /t REG_SZ /d "C:\cygwin\bin\ck.exe -share -dir \&quot;%L\&quot; &quot; /f
+		</div>
+	</li>
+	<li>
+		登録削除
+		<div class=cmd>
+			reg.exe delete &quot;HKCU\Software\Classes\Directory\shell\cygwin_ck&quot; /va /f
+		</div>
+	</li>
+	</ul>
+
+</div>
+
+<div class="t">その他</div>
+<div class="e">
+	ある程度 javascriptで書かれているので、<span style="color:green;">.ck.config.js</span> にあれこれ追記するとカスタマイズできます。<br>
+	但し、ck側の仕様変更で動かなくなる場合もあります。<br>
+	<br>
+
+	ESCでime off
+	<pre class=box>
+function user_cmd_ime_off(window){
+	if(window.ImeState)
+		window.ImeState = false;
+	return false;
+}
+AccelKeys.add(Keys.Escape, user_cmd_ime_off);</pre>
+	<br>
+	tcshを起動
+	<pre class=box>
+function user_cmd_new_tcsh(window){
+	var bak = Config.tty.execute_command;
+	Config.tty.execute_command = "/bin/tcsh";
+	Commands.wnd_new_shell(window);
+	Config.tty.execute_command = bak;
+	return true;
+}
+AccelKeys.add(Keys.ShiftL | Keys.CtrlL | Keys.B, user_cmd_new_tcsh, "New tcsh");</pre>
+	<br>
+</div>
+-->
+
+</body></html>

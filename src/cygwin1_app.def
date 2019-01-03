@@ -1,0 +1,12 @@
+﻿LIBRARY cygwin1.dll
+EXPORTS
+	chdir
+	close
+	cygwin_conv_path
+	cygwin_internal
+	ioctl
+	kill
+	poll
+	read
+	waitpid
+	write
